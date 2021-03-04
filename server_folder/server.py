@@ -12,18 +12,16 @@ print(addr, "has successfully connected to the server")
 
 while (1==1):
     
-    
-    
-    
-    file_name = conn.recv(1024)
-    print(file_name)
-    print("Updating file: ", file_name.decode("utf-8"))
-    file_data = conn.recv(2048)
-    file = open(file_name.decode("utf-8"), 'wb')
-    file.write(file_data)
-    file.close()
-    print("File recieved")
-    #break
+    try:
+        file_name = conn.recv(204800000)
+        print("Updating file: ", file_name.decode("utf-8"))
+        file_data = conn.recv(204800000)
+        file = open(file_name.decode("utf-8"), 'wb')
+        file.write(file_data)
+        file.close()
+        print("File recieved")
+    except:
+        conn, addr = s.accept()
 
     
 

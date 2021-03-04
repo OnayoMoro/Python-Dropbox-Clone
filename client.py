@@ -16,10 +16,10 @@ print("Connected, file sysnc operational")
 
 #File data structure 
 Files = namedtuple('File', 'name path size modified_date')
-files1 = [] #Keeps track of source dir server side
+files1 = [] #Keeps track of destination dir server side
 files2 = [] #Keeps track of source dir client side
 p = Path(fp)
-c = 0
+
 
 #Send files
 def sendfiles(files):
@@ -34,7 +34,7 @@ def sendfiles(files):
     namepath = fp + "\\" + file_name
     print(namepath)
     files = open(namepath, 'rb')
-    file_data = files.read(2048)
+    file_data = files.read(204800000)
     print("Data transmitting")
     s.send(file_data)
 
@@ -52,6 +52,7 @@ for item in p.glob('**/*'):
     #Send files to server for the first time
     sendfiles(Files(name, path, size, modified))
     time.sleep(2)
+
 
 #Loop to constantly re-populate new file list 
 while (1==1):
