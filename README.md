@@ -7,6 +7,7 @@ Overall with rough testing and implementation of basic functions, this project t
 Currently, the client and server together are able to connect to each other, update modified files, upload new files and delete files in the destination directory based on changes in the client source directory.
 
 Instructions
+
 . Create destination directory for server.
 
 . Change the port number in the server code to your desired number and change the 'fp' variable with the location of the intended destination directory.
