@@ -10,8 +10,9 @@ fp = r'Insert windows dir or delete the "r" to use a linux dir format'
 
 #Establish Connection
 s = socket.socket()
+#Can also used commented code bellow to enter host address via console 
 #host = input(str("Please enter server host address: "))
-host = "DESKTOP-MEDSG9I"
+host = "Insert hostname or IP"
 port = 420
 s.connect((host,port))
 print("Connected, file sysnc operational")
@@ -21,7 +22,7 @@ Files = namedtuple('File', 'name path size modified_date')
 files1 = [] #Keeps track of destination dir server side
 files2 = [] #Keeps track of source dir client side
 p = Path(fp)
-delay = .2
+delay = 1
 
 
 #Send files
@@ -44,6 +45,7 @@ def sendfiles(files):
     file_data = files.read(204800000)
     print("Data transmitting")
     s.send(file_data)
+    time.sleep(delay)
 
 
 def deletefiles(files):
@@ -77,12 +79,12 @@ def addingfiles():
                     
             #If file is not on server
             elif files2[i] not in files1:
-                files1.append(files2[i])
+                files1.insert(i,files2[i])
                 sendfiles(files2[i])
         except:
             #If file is not on server
             if files2[i] not in files1:
-                files1.append(files2[i])
+                files1.insert(i,files2[i])
                 sendfiles(files2[i])
             else:
                 print("Something went wrong when trying to update files")
@@ -97,12 +99,13 @@ def deletingfiles():
             print("File ", files1[i].name, "deleted")
             deletefiles(files1[i])
             files1.remove(files1[i])
+            i-=1
             time.sleep(delay)
                 
         #If file is not deleted
         else:
             print("File ", files1[i].name, "not deleted")
-            #time.sleep(delay)
+            time.sleep(delay)
         i+=1
 
 
@@ -139,7 +142,7 @@ while (1==1):
 
     #Compare lists for changes for ADDING new files to server
     addingfiles()
-    
+
     #Compare lists for changes for DELETING new files from server
     deletingfiles()
         
