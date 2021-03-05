@@ -1,7 +1,7 @@
 Python-Dropbox-Clone
 Introduction.
 
-This is a rough and simple python server and client implementation that syncs the files in a source directory from the client to a destination directory on the server. Overall with rough testing and implementation of basic functions, this project took between 3 to 4 hours to complete.
+This is a rough and simple python server and client implementation that syncs the files in a source directory from the client to a destination directory on the server. Overall with rough testing and implementation of basic functions, this project took between 3 1/2 hours to complete.
 
 Currently, the client and server together are able to connect to each other, update modified files, upload new files and delete files in the destination directory based on changes in the client source directory.
 
